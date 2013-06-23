@@ -1,13 +1,20 @@
-modulo_hash
-===========
+## About
 
-a hash based on simple modulo 
+The so-called modulo hash is a simple implementation of a technique to even distributed sources to a 
+list of targets. Typically, the source would be a job or request to be assigned to a single host in
+a list of hosts. The technique is simple: we hash the source string to a int, and this int is mod'd with
+the number of targets in the targets list. 
 
-this is a very simple module:
+## Installing
 
-given a list of target strings, a source element can be fairly mapped on to one of those
-target strings by taking the crc32 sum of the source element and getting the modulo of this
-value with the length of the list of target strings. 
+   $ go get github.com/bradclawsie/modulo_hash
 
-this is useful for load balancing, for example. run the tests to see how this function
-provides a good distribution of maps of sources to targets.
+## Docs
+
+   $ go doc github.com/bradclawsie/modulo_hash
+
+## Examples
+
+The included unit test file contains examples of the various ways the modulo hash can be used.
+
+
