@@ -17,4 +17,3 @@ the number of targets in the targets list.
 
 The included unit test file contains examples of the various ways the modulo hash can be used.
 
-

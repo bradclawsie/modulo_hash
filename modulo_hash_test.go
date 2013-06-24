@@ -12,7 +12,7 @@ func TestMHash(t *testing.T) {
 	mh := NewModuloHash()
 	items := []string{"127.0.0.1","17.0.1.1","1.1.0.1","27.99.0.111","64.0.8.8","8.8.8.8","10.100.0.100",
 		"128.4.4.4","28.28.1.1","28.10.0.10","12.9.0.10","11.11.8.1","13.10.0.19","128.19.19.1"}
-	mh.Targets = items
+	mh.SetTargets(items)
 	// test distribution
 	dist := make(map [string] int)
 	total := 10000
@@ -36,7 +36,7 @@ func TestEmpty(t *testing.T) {
 	if tgt_err == nil || tgt != "" {
 		t.Errorf("no error on empty target list")
 	}
-	mh.Targets = []string{"hi","there","how","are","you"}
+	mh.SetTargets([]string{"hi","there","how","are","you"})
 	tgt,tgt_err = mh.Find("")
 	if tgt_err == nil || tgt != "" {
 		t.Errorf("no error on empty target list")
