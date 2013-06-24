@@ -20,6 +20,11 @@ func NewModuloHash() (*ModuloHash) {
 	return h
 }
 
+// Alias to NewModuloHash
+func New() (*ModuloHash) {
+	return NewModuloHash()
+}
+
 // Read a copy of the targets list
 func (h *ModuloHash) GetTargets() []string {
 	h.mutex.Lock()
