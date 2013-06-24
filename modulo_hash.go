@@ -15,15 +15,21 @@ type ModuloHash struct {
 
 // Create a new ModuloHash
 func NewModuloHash() (*ModuloHash) {
-	mh := new(ModuloHash)
-	mh.targets = make([]string,0)
-	return mh
+	h := new(ModuloHash)
+	h.targets = make([]string,0)
+	return h
 }
 
+// Read a copy of the targets list
 func (h *ModuloHash) GetTargets() []string {
-	return h.targets
+	h.mutex.Lock()
+	defer h.mutex.Unlock()
+	tgts := make([]string,len(h.targets))
+	copy(tgts,h.targets)
+	return tgts
 }
 
+// Write a new targets list
 func (h *ModuloHash) SetTargets(tgts []string) {
 	h.mutex.Lock()
 	defer h.mutex.Unlock()
@@ -31,7 +37,7 @@ func (h *ModuloHash) SetTargets(tgts []string) {
 	copy(h.targets,tgts)
 }
 
-// fairly find a target value in the array Targets by using the crc32 hash value 
+// Fairly find a target value in the array Targets by using the crc32 hash value 
 // mod'd with the number of targets in the target list
 func (h *ModuloHash) Find(s string) (string,error) {
 	h.mutex.Lock()
