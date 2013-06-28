@@ -27,8 +27,8 @@ func New() (*ModuloHash) {
 
 // Read a copy of the targets list
 func (h *ModuloHash) GetTargets() []string {
-	h.mutex.Lock()
-	defer h.mutex.Unlock()
+	h.mutex.RLock()
+	defer h.mutex.RUnlock()
 	tgts := make([]string,len(h.targets))
 	copy(tgts,h.targets)
 	return tgts
@@ -45,8 +45,8 @@ func (h *ModuloHash) SetTargets(tgts []string) {
 // Fairly find a target value in the array Targets by using the crc32 hash value 
 // mod'd with the number of targets in the target list
 func (h *ModuloHash) Find(s string) (string,error) {
-	h.mutex.Lock()
-	defer h.mutex.Unlock()
+	h.mutex.RLock()
+	defer h.mutex.RUnlock()
 	l := len(h.targets) 
 	if l == 0 {
 		return "",errors.New("cannot match to empty targets list")
