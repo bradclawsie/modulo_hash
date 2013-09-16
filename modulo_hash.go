@@ -1,3 +1,5 @@
+// A package for fairly hashing keys to a small set of values. Uses crc32 to create uniformly distributed values that
+// are then hashed again to a target list of your choice using modulo indexing. Useful for work distribution, etc.
 package modulo_hash
 
 import (
@@ -13,19 +15,19 @@ type ModuloHash struct {
 	mutex sync.RWMutex
 }
 
-// Create a new ModuloHash
+// NewModuloHash will create a new ModuloHash.
 func NewModuloHash() (*ModuloHash) {
 	h := new(ModuloHash)
 	h.targets = make([]string,0)
 	return h
 }
 
-// Alias to NewModuloHash
+// New is an alias to NewModuloHash.
 func New() (*ModuloHash) {
 	return NewModuloHash()
 }
 
-// Read a copy of the targets list
+// GetTargets will read a copy of the targets list.
 func (h *ModuloHash) GetTargets() []string {
 	h.mutex.RLock()
 	defer h.mutex.RUnlock()
@@ -34,7 +36,7 @@ func (h *ModuloHash) GetTargets() []string {
 	return tgts
 }
 
-// Write a new targets list
+// SetTargets will write a new targets list.
 func (h *ModuloHash) SetTargets(tgts []string) {
 	h.mutex.Lock()
 	defer h.mutex.Unlock()
@@ -42,8 +44,8 @@ func (h *ModuloHash) SetTargets(tgts []string) {
 	copy(h.targets,tgts)
 }
 
-// Fairly find a target value in the array Targets by using the crc32 hash value 
-// mod'd with the number of targets in the target list
+// Find will fairly determine a target value in the array Targets by using the crc32 hash value 
+// mod'd with the number of targets in the target list.
 func (h *ModuloHash) Find(s string) (string,error) {
 	h.mutex.RLock()
 	defer h.mutex.RUnlock()
