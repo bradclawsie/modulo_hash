@@ -1,19 +1,9 @@
-## About
+[![License BSD](https://img.shields.io/badge/License-BSD-blue.svg)](http://opensource.org/licenses/BSD-3-Clause)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bradclawsie/modulohash)](https://goreportcard.com/report/github.com/bradclawsie/modulohash)
+[![GoDoc](https://godoc.org/github.com/bradclawsie/httpshutdown?status.svg)](http://godoc.org/github.com/bradclawsie/modulohash)
+[![Build Status](https://travis-ci.org/bradclawsie/modulohash.png)](https://travis-ci.org/bradclawsie/modulohash)
 
-The so-called modulo hash is a simple implementation of a technique to even distributed sources to a 
-list of targets. Typically, the source would be a job or request to be assigned to a single host in
-a list of hosts. The technique is simple: we hash the source string to a int, and this int is mod'd with
-the number of targets in the targets list. 
+## modulohash
 
-## Installing
-
-   $ go get github.com/bradclawsie/modulo_hash
-
-## Docs
-
-   $ go doc github.com/bradclawsie/modulo_hash
-
-## Examples
-
-The included unit test file contains examples of the various ways the modulo hash can be used.
+Map a string in a list using CRC32.
 
